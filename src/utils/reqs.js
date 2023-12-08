@@ -1,8 +1,10 @@
 import axios from "axios";
 
+const server_url = "http://localhost:4444";
+
 export const reqLogin = async ({ email, password }) => {
   const res = await axios.post(
-    "http://localhost:4444/auth/signin",
+    `${server_url}/auth/signin`,
     {
       email,
       password,
@@ -14,7 +16,7 @@ export const reqLogin = async ({ email, password }) => {
 };
 
 export const reqRegister = async ({ name, email, password }) => {
-  const res = await axios.post("http://localhost:4444/auth/signup", {
+  const res = await axios.post(`${server_url}/auth/signup`, {
     name,
     email,
     password,
@@ -24,14 +26,14 @@ export const reqRegister = async ({ name, email, password }) => {
 };
 
 export const authTest = async () => {
-  const res = await axios.get("http://localhost:4444/auth/test", {
+  const res = await axios.get(`${server_url}/auth/test`, {
     withCredentials: true,
   });
 
   return res.data;
 };
 export const signOut = async () => {
-  const res = await axios.get("http://localhost:4444/auth/signout", {
+  const res = await axios.get(`${server_url}/auth/signout`, {
     withCredentials: true,
   });
 
@@ -39,7 +41,7 @@ export const signOut = async () => {
 };
 
 export const reqProfile = async (uid) => {
-  const res = await axios.get(`http://localhost:4444/api/users/${uid}`, {
+  const res = await axios.get(`${server_url}/api/users/${uid}`, {
     withCredentials: true,
   });
 
@@ -47,14 +49,14 @@ export const reqProfile = async (uid) => {
 };
 
 export const updateUser = async (uid, pl) => {
-  const res = await axios.put(`http://localhost:4444/api/users/${uid}`, pl, {
+  const res = await axios.put(`${server_url}/api/users/${uid}`, pl, {
     withCredentials: true,
   });
 
   return res.data;
 };
 export const reqAllUsers = async () => {
-  const res = await axios.get(`http://localhost:4444/api/users`, {
+  const res = await axios.get(`${server_url}/api/users`, {
     withCredentials: true,
   });
 
@@ -63,7 +65,7 @@ export const reqAllUsers = async () => {
 
 export const reqAllMsgs = async (rid) => {
   const res = await axios.post(
-    `http://localhost:4444/api/msg`,
+    `${server_url}/api/msg`,
     { roomId: rid },
     {
       withCredentials: true,
