@@ -1,34 +1,15 @@
 import HomeIcon from "@heroicons/react/24/solid/HomeIcon";
 
 import { Link } from "react-router-dom";
-import { authTest, signOut } from "../utils/reqs";
+import { signOut } from "../utils/reqs";
+import PropType from "prop-types";
 
-import { useEffect, useState } from "react";
-
-const Nav = () => {
-  const [isAuth, setIsAuth] = useState(false);
-  const [userId, setUserId] = useState(null);
-
-  useEffect(() => {
-    const checkauth = async () => {
-      const res = await authTest();
-
-      if (res.type == "success") {
-        setIsAuth(true);
-        setUserId(res.message);
-        localStorage.setItem("_idSender", res.message);
-      }
-    };
-
-    return () => checkauth();
-  }, []);
-
+const Nav = ({ isAuth, userId }) => {
   const logoutHandler = async () => {
     await signOut();
     localStorage.removeItem("_idSender");
     window.location.replace("/");
   };
-
   return (
     <nav className="bg-indigo-500 text-white">
       <ul className="flex flex-row items-center gap-2 p-2">
@@ -68,6 +49,11 @@ const Nav = () => {
       </ul>
     </nav>
   );
+};
+
+Nav.propTypes = {
+  isAuth: PropType.bool,
+  userId: PropType.string,
 };
 
 export default Nav;
