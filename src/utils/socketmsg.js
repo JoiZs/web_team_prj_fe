@@ -1,3 +1,6 @@
 import { io } from "socket.io-client";
 
-export const socket = io("http://localhost:4444");
+// eslint-disable-next-line no-undef
+const server_url = process.env.SERVER_URL || "http://localhost:4444";
+
+export const socket = io(server_url);

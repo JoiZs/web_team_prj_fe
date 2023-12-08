@@ -1,6 +1,7 @@
 import axios from "axios";
 
-const server_url = "http://localhost:4444";
+// eslint-disable-next-line no-undef
+const server_url = process.env.SERVER_URL || "http://localhost:4444";
 
 export const reqLogin = async ({ email, password }) => {
   const res = await axios.post(
